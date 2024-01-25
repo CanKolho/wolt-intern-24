@@ -7,7 +7,6 @@ const App = () => {
       <img src={logo} width={80} />
       <DeliveryFeeForm />
     </>
-    
   )
 }
 

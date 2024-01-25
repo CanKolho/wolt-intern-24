@@ -17,3 +17,8 @@ export interface ValidatedInputs {
   items: number,
   date: Dayjs,
 }
+
+export interface CustomDatePickerProps {
+  date: Dayjs,
+  setDate: React.Dispatch<React.SetStateAction<Dayjs>>,
+}

@@ -7,9 +7,6 @@ const formStyles = {
     marginTop: 8, 
     gap: 2 
   },
-  datePicker: { 
-    textField: { fullWidth: true }
-  },
   submitButton: {
     backgroundColor: 'rgb(0, 157, 224)',
     transition: '0.3s',

@@ -8,10 +8,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import DeliveryFee from '../DeliveryFee';
 import Notification from '../Notification';
+import CustomDatepicker from '../CustomDatepicker';
 import { ValidatedInputs } from '../../types';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs, { Dayjs } from 'dayjs';
 import { calculateDeliveryFee } from '../../utils/calculation';
 import { validateInputs } from '../../utils/validation';
@@ -24,8 +22,8 @@ const DeliveryFeeForm = () => {
   const { reset: resetItems, ...items }= useField('text');
 
   const [date, setDate] = useState<Dayjs>(dayjs());
-  const [deliveryFee, setDeliveryFee] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [deliveryFee, setDeliveryFee] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,12 +63,7 @@ const DeliveryFeeForm = () => {
             <Grid item xs={6}><TextField required fullWidth {...distance} id="distance" data-test-id="distance" label="Distance (m)" name="distance" /></Grid>
             <Grid item xs={12}><TextField required fullWidth {...items} id="items" data-test-id="items" label="Amount of items (count)" name="items" /></Grid>
             {/* DatePicker component */}
-            <Grid item xs={12}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker label="Delivery Date" aria-label="Delivery date" data-test-id="deliveryDate"
-                            slotProps={formStyles.datePicker} format='DD/MM/YYYY' value={date} onChange={ (newDate) => setDate(newDate || dayjs()) }/>
-              </LocalizationProvider>
-            </Grid>
+            <Grid item xs={12}><CustomDatepicker date={date} setDate={setDate} /></Grid>
             {/* Button components */}
             <Grid item xs={3}><Button fullWidth variant="outlined" color="error" data-test-id="reset-button" onClick={handleReset}>Reset</Button></Grid>
             <Grid item xs={9}><Button fullWidth variant="contained" color="primary" data-test-id="calculate-button" sx={formStyles.submitButton} type="submit">Calculate</Button></Grid>
