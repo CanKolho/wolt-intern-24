@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+
 export interface UseFieldReturn {
   type: string;
   value: string;
@@ -7,4 +9,11 @@ export interface UseFieldReturn {
 
 export interface deliveryFeeProps {
   deliveryFee: string
+}
+
+export interface ValidatedInputs {
+  cartValue: number,
+  distance: number,
+  items: number,
+  date: Dayjs,
 }

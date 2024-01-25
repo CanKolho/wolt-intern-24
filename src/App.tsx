@@ -1,8 +1,13 @@
-import DeliveryFeeForm from "./components/DeliveryFeeForm";
+import DeliveryFeeForm from "./components/DeliveryFeeform/DeliveryFeeForm";
+import logo from './assets/logo.png'
 
 const App = () => {
   return (
-    <DeliveryFeeForm />
+    <>
+      <img src={logo} width={80} />
+      <DeliveryFeeForm />
+    </>
+    
   )
 }
 

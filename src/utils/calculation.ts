@@ -1,4 +1,5 @@
 import { Dayjs } from 'dayjs';
+import { ValidatedInputs } from '../types';
 
 const calculateSmallOrderFee = (cartValue: number): number => {
   console.log(`cart charge: ${cartValue < 10 ? 10 - cartValue : 0}€`)
@@ -35,7 +36,7 @@ const calculateItemsFee = (items: number): number => {
 
 const calculateRushHourMultiplier = (deliveryFee: number, date: Dayjs): number => {
   const isFriday = date.day() === 5;
-  const isRushHour = date.hour() >= 15 && date.hour() <= 19;
+  const isRushHour = date.hour() >= 15 && date.hour() < 19;
 
   // 20% extra on fridays between 15-19
   return isFriday && isRushHour 
@@ -43,15 +44,14 @@ const calculateRushHourMultiplier = (deliveryFee: number, date: Dayjs): number =
     : deliveryFee 
 }
 
+export const calculateDeliveryFee = (validatedInputs: ValidatedInputs): number => {
+  if (validatedInputs.cartValue >= 200) return 0;
 
-export const calculateDeliveryFee = (cartValue: number, distance: number, items: number, date: Dayjs): number => {
-  if (cartValue >= 200) return 0;
-
-  let deliveryFee = calculateSmallOrderFee(cartValue);
-  deliveryFee += calculateDistanceFee(distance);
-  deliveryFee += calculateItemsFee(items);
+  let deliveryFee = calculateSmallOrderFee(validatedInputs.cartValue);
+  deliveryFee += calculateDistanceFee(validatedInputs.distance);
+  deliveryFee += calculateItemsFee(validatedInputs.items);
   
-  deliveryFee = calculateRushHourMultiplier(deliveryFee, date);
+  deliveryFee = calculateRushHourMultiplier(deliveryFee, validatedInputs.date);
 
   return Math.min(deliveryFee, 15);
 }
