@@ -9,7 +9,7 @@ import Button from '@mui/material/Button'
 import DeliveryFee from '../DeliveryFee';
 import Notification from '../Notification';
 import CustomDatepicker from '../CustomDatepicker';
-import { ValidatedInputs } from '../../types';
+import { ValidatedInputs, NonValidatedInputs } from '../../types';
 import dayjs, { Dayjs } from 'dayjs';
 import { calculateDeliveryFee } from '../../utils/calculation';
 import { validateInputs } from '../../utils/validation';
@@ -20,7 +20,6 @@ const DeliveryFeeForm = () => {
   const { reset: resetCartValue, ...cartValue } = useField('text');
   const { reset: resetDistance, ...distance } = useField('text');
   const { reset: resetItems, ...items }= useField('text');
-
   const [date, setDate] = useState<Dayjs>(dayjs());
   const [deliveryFee, setDeliveryFee] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -28,11 +27,17 @@ const DeliveryFeeForm = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const nonValidatedInputs: NonValidatedInputs = {
+      cartValue: cartValue.value,
+      distance: distance.value,
+      items: items.value,
+      date: date.format('DD-MM-YYYY HH:mm:ss')
+    }
+
     try {
-      const validatedInputs: ValidatedInputs = validateInputs(cartValue.value, distance.value, items.value, date.format('DD-MM-YYYY HH:mm:ss'));
+      const validatedInputs: ValidatedInputs = validateInputs(nonValidatedInputs);
       const calculatedFee: number = calculateDeliveryFee(validatedInputs);
       setDeliveryFee(calculatedFee.toFixed(2));
-
     } catch (error: unknown) {
       let errorMessage = '';
       if (error instanceof Error) {

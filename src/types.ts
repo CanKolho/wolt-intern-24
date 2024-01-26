@@ -11,6 +11,13 @@ export interface deliveryFeeProps {
   deliveryFee: string
 }
 
+export interface NonValidatedInputs {
+  cartValue: string,
+  distance: string,
+  items: string,
+  date: string,
+}
+
 export interface ValidatedInputs {
   cartValue: number,
   distance: number,

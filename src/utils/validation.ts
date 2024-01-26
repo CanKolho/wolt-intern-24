@@ -1,4 +1,4 @@
-import { ValidatedInputs } from '../types';
+import { ValidatedInputs, NonValidatedInputs } from '../types';
 import dayjs from 'dayjs';
 
 const validateDecimalPoint = (input: string): boolean => {
@@ -18,7 +18,7 @@ const validateDate = (input: string): boolean => {
   return regex.test(input);
 }
 
-export const validateInputs = (cartValue: string, distance: string, items: string, date: string): ValidatedInputs => {
+export const validateInputs = ({ cartValue, distance, items, date }: NonValidatedInputs): ValidatedInputs => {
   if (!validateDecimalPoint(cartValue)) {
     throw new Error('Cart value must be a number with a decimal point.');
   }
