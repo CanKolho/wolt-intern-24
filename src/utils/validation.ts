@@ -13,14 +13,14 @@ const validatePositiveNum = (input: string): boolean => {
 }
 
 const validateDate = (input: string): boolean => {
-  // Regex to validate a date in the format DD-MM-YYYY
-  const regex = /^\d{2}-\d{2}-\d{4}/;
+  // Regex to validate a date in the format DD-MM-YYYY HH:mm:ss
+  const regex = /^\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}$/;
   return regex.test(input);
 }
 
 export const validateInputs = ({ cartValue, distance, items, date }: NonValidatedInputs): ValidatedInputs => {
   if (!validateDecimalPoint(cartValue)) {
-    throw new Error('Cart value must be a number with a decimal point.');
+    throw new Error('Cart value must be a positive number with a decimal point.');
   }
 
   if (!validatePositiveNum(distance)) {

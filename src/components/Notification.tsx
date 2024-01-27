@@ -6,7 +6,7 @@ const Notification = ({ message }: { message: string }) => {
   if (!message) return null;
 
   return (
-    <Box width="100%">
+    <Box width="100%" data-test-id='notification'>
       <Alert severity="error">
         <AlertTitle>Error</AlertTitle>
         {message}
