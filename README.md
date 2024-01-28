@@ -29,8 +29,8 @@ What things you need to install the software and how to install them:
 ## Installation
 A step-by-step series of examples that tell you how to get a development environment running:
 ```bash
-git clone [https://github.com/CanKolho/wolt-intern-24.gitl]
-cd [wolt-intern-24]
+git clone https://github.com/CanKolho/wolt-intern-24.gitl
+cd wolt-intern-24
 npm install
 npm start
 ```
@@ -51,4 +51,4 @@ List of features implemented in the project:
 Explain how to run the automated tests for this system.
 
 ## Authors
-- **Can kolho** - *Initial work* - [https://github.com/CanKolho](Github)
+- **Can kolho** - *Initial work* - [Github](https://github.com/CanKolho)
