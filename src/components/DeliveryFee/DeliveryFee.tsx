@@ -1,11 +1,11 @@
 import Typography from '@mui/material/Typography';
-import { deliveryFeeProps } from '../types';
+import { deliveryFeeProps } from '../../types';
 
 const DeliveryFee = ({ deliveryFee }: deliveryFeeProps) => {
   if (!deliveryFee) return null;
   
   return (
-    <Typography component="h2" variant="h6" data-test-id='fee'>
+    <Typography component="h2" variant="h6" data-testid='fee'>
       Delivery Fee: {deliveryFee} €
     </Typography>
   )

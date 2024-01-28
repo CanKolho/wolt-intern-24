@@ -23,7 +23,7 @@ export const validateInputs = ({ cartValue, distance, items, date }: NonValidate
     throw new Error('Cart value must be a positive number with a decimal point.');
   }
 
-  if (!validatePositiveNum(distance)) {
+  if (!validateDecimalPoint(distance)) {
     throw new Error('Distance must be a positive number.');
   }
 

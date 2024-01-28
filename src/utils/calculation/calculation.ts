@@ -1,12 +1,12 @@
 import { Dayjs } from 'dayjs';
-import { ValidatedInputs } from '../types';
+import { ValidatedInputs } from '../../types';
 
-const calculateSmallOrderFee = (cartValue: number): number => {
+export const calculateSmallOrderFee = (cartValue: number): number => {
   const smallOrderFee = 10;
   return cartValue < smallOrderFee ? smallOrderFee - cartValue : 0; 
 };
 
-const calculateDistanceFee = (distance: number): number => {
+export const calculateDistanceFee = (distance: number): number => {
   if (distance < 1000) return 1;
 
   const base = 2;
@@ -15,7 +15,7 @@ const calculateDistanceFee = (distance: number): number => {
   return base + additionalCharge;
 }
 
-const calculateItemsFee = (items: number): number => {
+export const calculateItemsFee = (items: number): number => {
   if (items < 5) return 0;
 
   const perItemCharge = 0.5;
@@ -25,7 +25,7 @@ const calculateItemsFee = (items: number): number => {
   return itemSurCharge + bulkFee;
 }
 
-const applyRushHourMultiplier = (deliveryFee: number, date: Dayjs): number => {
+export const applyRushHourMultiplier = (deliveryFee: number, date: Dayjs): number => {
   const isFriday = date.day() === 5;
   const isRushHour = date.hour() >= 15 && date.hour() < 19;
   const rushHourMultiplier = 1.2;

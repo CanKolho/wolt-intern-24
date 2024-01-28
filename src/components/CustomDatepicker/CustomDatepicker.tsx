@@ -1,7 +1,7 @@
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { CustomDatePickerProps } from '../types';
+import { CustomDatePickerProps } from '../../types';
 import dayjs from 'dayjs';
 
 const CustomDatepicker = ({ date, setDate }: CustomDatePickerProps) => {
@@ -10,8 +10,14 @@ const CustomDatepicker = ({ date, setDate }: CustomDatePickerProps) => {
       <DatePicker 
         label="Delivery Date" 
         aria-label="Delivery date" 
-        data-test-id="deliveryDate"
-        slotProps={{ textField: { fullWidth: true } }} 
+        slotProps={{ 
+          textField: { 
+            fullWidth: true, 
+            inputProps: { 
+              'data-testid': 'deliveryDate' 
+            } 
+          } 
+        }} 
         format='DD/MM/YYYY'
 
         value={date} 

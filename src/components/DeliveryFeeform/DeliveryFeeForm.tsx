@@ -6,20 +6,20 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
-import DeliveryFee from '../DeliveryFee';
-import Notification from '../Notification';
-import CustomDatepicker from '../CustomDatepicker';
+import DeliveryFee from '../DeliveryFee/DeliveryFee';
+import Notification from '../Notification/Notification';
+import CustomDatepicker from '../CustomDatepicker/CustomDatepicker';
 import { ValidatedInputs, NonValidatedInputs } from '../../types';
 import dayjs, { Dayjs } from 'dayjs';
-import { calculateDeliveryFee } from '../../utils/calculation';
+import { calculateDeliveryFee } from '../../utils/calculation/calculation';
 import { validateInputs } from '../../utils/validation';
 import formStyles from './formStyles';
 
 const DeliveryFeeForm = () => {
   // Custom hook for the text fields - reset is destructured from the returned object
-  const { reset: resetCartValue, ...cartValue } = useField('text');
-  const { reset: resetDistance, ...distance } = useField('text');
-  const { reset: resetItems, ...items }= useField('text');
+  const { reset: resetCartValue, ...cartValue } = useField('number');
+  const { reset: resetDistance, ...distance } = useField('number');
+  const { reset: resetItems, ...items }= useField('number');
   const [date, setDate] = useState<Dayjs>(dayjs());
   const [deliveryFee, setDeliveryFee] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -44,7 +44,7 @@ const DeliveryFeeForm = () => {
         errorMessage += error.message;
       }
       setErrorMessage(errorMessage);
-      setTimeout(() => setErrorMessage(''), 5000);
+      setTimeout(() => setErrorMessage(''), 6000);
     }
   }
 
@@ -64,9 +64,9 @@ const DeliveryFeeForm = () => {
         <Box component="form" onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
             {/* Textfield components */}
-            <Grid item xs={6}><TextField required fullWidth {...cartValue} id="cartValue" data-test-id="cartValue" label="Cart Value (€)" name="cartValue" /></Grid>
-            <Grid item xs={6}><TextField required fullWidth {...distance} id="distance" data-test-id="distance" label="Distance (m)" name="distance" /></Grid>
-            <Grid item xs={12}><TextField required fullWidth {...items} id="items" data-test-id="items" label="Amount of items (count)" name="items" /></Grid>
+            <Grid item xs={6}><TextField required fullWidth {...cartValue} id="cartValue" data-test-id="cartValue" label="Cart Value (€)" name="cartValue" InputProps={{ inputProps: { min: 0 } }}/></Grid>
+            <Grid item xs={6}><TextField required fullWidth {...distance} id="distance" data-test-id="distance" label="Distance (m)" name="distance" InputProps={{ inputProps: { min: 0 } }}/></Grid>
+            <Grid item xs={12}><TextField required fullWidth {...items} id="items" data-test-id="items" label="Amount of items (count)" name="items" InputProps={{ inputProps: { min: 0 } }}/></Grid>
             {/* DatePicker component */}
             <Grid item xs={12}><CustomDatepicker date={date} setDate={setDate} /></Grid>
             {/* Button components */}
