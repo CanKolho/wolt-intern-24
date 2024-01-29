@@ -4,10 +4,10 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import DeliveryFee from '../DeliveryFee/DeliveryFee';
 import Notification from '../Notification/Notification';
+import CustomTextField from '../CustomTextField/CustomTextField';
 import CustomDatepicker from '../CustomDatepicker/CustomDatepicker';
 import { ValidatedInputs, NonValidatedInputs } from '../../types';
 import dayjs, { Dayjs } from 'dayjs';
@@ -64,17 +64,17 @@ const DeliveryFeeForm = () => {
         <Box component="form" onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
             {/* Textfield components */}
-            <Grid item xs={6}><TextField required fullWidth {...cartValue} id="cartValue" data-test-id="cartValue" label="Cart Value (€)" name="cartValue" InputProps={{ inputProps: { min: 0 } }}/></Grid>
-            <Grid item xs={6}><TextField required fullWidth {...distance} id="distance" data-test-id="distance" label="Distance (m)" name="distance" InputProps={{ inputProps: { min: 0 } }}/></Grid>
-            <Grid item xs={12}><TextField required fullWidth {...items} id="items" data-test-id="items" label="Amount of items (count)" name="items" InputProps={{ inputProps: { min: 0 } }}/></Grid>
+            <Grid item xs={6}><CustomTextField {...cartValue} label='Cart Value (€)' testId='cartValue' /></Grid>
+            <Grid item xs={6}><CustomTextField {...distance} label="Distance (m)" testId='distance' /></Grid>
+            <Grid item xs={12}><CustomTextField {...items} label="Amount of items (count)" testId='items'/></Grid>
             {/* DatePicker component */}
             <Grid item xs={12}><CustomDatepicker date={date} setDate={setDate} /></Grid>
             {/* Button components */}
-            <Grid item xs={3}><Button fullWidth variant="outlined" color="error" data-test-id="reset-button" onClick={handleReset}>Reset</Button></Grid>
-            <Grid item xs={9}><Button fullWidth variant="contained" color="primary" data-test-id="calculate-button" sx={formStyles.submitButton} type="submit">Calculate</Button></Grid>
+            <Grid item xs={9}><Button fullWidth variant="contained" color="primary" data-testid="calculate-button" sx={formStyles.submitButton} type="submit">Calculate</Button></Grid>
+            <Grid item xs={3}><Button fullWidth variant="outlined" color="error" data-testid="reset-button" onClick={handleReset}>Reset</Button></Grid>
           </Grid>
         </Box>
-        {deliveryFee && <DeliveryFee deliveryFee={deliveryFee} />}
+        <DeliveryFee deliveryFee={deliveryFee} />
       </Box>
     </Container>
   );
