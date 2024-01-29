@@ -29,3 +29,11 @@ export interface CustomDatePickerProps {
   date: Dayjs,
   setDate: React.Dispatch<React.SetStateAction<Dayjs>>,
 }
+
+export interface CustomTextFieldProps {
+  type: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string,
+  testId: string
+}
