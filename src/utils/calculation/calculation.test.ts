@@ -80,7 +80,7 @@ describe('applyRushHourMultiplier', () => {
     expect(result).toBe(10);
 
     // Friday but not rush hour
-    dayjs('26-01-2024 14:00:00', 'DD-MM-YYYY HH:mm');
+    date = dayjs('26-01-2024 14:00:00', 'DD-MM-YYYY HH:mm');
     const result2 = applyRushHourMultiplier(deliveryFee, date);
     expect(result2).toBe(10);
   });
