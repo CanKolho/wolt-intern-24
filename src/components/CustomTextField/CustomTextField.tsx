@@ -7,9 +7,10 @@ const CustomTextField = ({ testId, ...props }: CustomTextFieldProps) => {
       required 
       fullWidth
       InputProps={{ 
-        inputProps: { 
-          'data-testid': testId, 
-          min: 0
+        inputProps: {
+          'data-test-id': testId,
+          'data-testid': testId,
+          min: 0,
         }
       }}
       {...props}

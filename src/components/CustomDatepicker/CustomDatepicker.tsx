@@ -14,7 +14,9 @@ const CustomDatepicker = ({ date, setDate }: CustomDatePickerProps) => {
           textField: { 
             fullWidth: true, 
             inputProps: { 
-              'data-testid': 'deliveryDate' 
+              'data-test-id': 'orderTime',
+              'data-testid': 'orderTime',
+              min: 0,
             } 
           } 
         }} 

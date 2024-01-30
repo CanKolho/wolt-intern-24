@@ -65,13 +65,13 @@ const DeliveryFeeForm = () => {
           <Grid container spacing={2}>
             {/* Textfield components */}
             <Grid item xs={6}><CustomTextField {...cartValue} label='Cart Value (€)' testId='cartValue' /></Grid>
-            <Grid item xs={6}><CustomTextField {...distance} label="Distance (m)" testId='distance' /></Grid>
-            <Grid item xs={12}><CustomTextField {...items} label="Amount of items (count)" testId='items'/></Grid>
+            <Grid item xs={6}><CustomTextField {...distance} label="Distance (m)" testId='deliveryDistance' /></Grid>
+            <Grid item xs={12}><CustomTextField {...items} label="Amount of items (count)" testId='numberOfItems'/></Grid>
             {/* DatePicker component */}
             <Grid item xs={12}><CustomDatepicker date={date} setDate={setDate} /></Grid>
             {/* Button components */}
-            <Grid item xs={9}><Button fullWidth variant="contained" color="primary" data-testid="calculate-button" sx={formStyles.submitButton} type="submit">Calculate</Button></Grid>
-            <Grid item xs={3}><Button fullWidth variant="outlined" color="error" data-testid="reset-button" onClick={handleReset}>Reset</Button></Grid>
+            <Grid item xs={9}><Button fullWidth variant="contained" color="primary" data-testid="calculate-button" data-test-id="calculate-button" sx={formStyles.submitButton} type="submit">Calculate</Button></Grid>
+            <Grid item xs={3}><Button fullWidth variant="outlined" color="error" data-testid="reset-button" data-test-id="reset-button" onClick={handleReset}>Reset</Button></Grid>
           </Grid>
         </Box>
         <DeliveryFee deliveryFee={deliveryFee} />

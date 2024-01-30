@@ -17,7 +17,7 @@ describe('CustomDatepicker', () => {
   })
 
   it('renders correctly', () => {    
-    const element = screen.getByTestId('deliveryDate')
+    const element = screen.getByTestId('orderTime')
     expect(element).toBeInTheDocument()
   })
 
@@ -35,7 +35,7 @@ describe('CustomDatepicker', () => {
 
    it('allows user to type a date', async () => {
     // deliveryDate is the test id of the input field
-    const datePickerInput = screen.getByTestId('deliveryDate')
+    const datePickerInput = screen.getByTestId('orderTime')
     await user.type(datePickerInput, '14/2/2024')
 
     // Extract the date from the last call
