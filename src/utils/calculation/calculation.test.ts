@@ -46,6 +46,11 @@ describe('calculateDistanceFee', () => {
     result = calculateDistanceFee(distance);
     expect(result).toBe(4);
   });
+
+  it('should throw error when distance is negative', () => {
+    const distance = -1;
+    expect(() => calculateDistanceFee(distance)).toThrow('Distance cannot be negative');
+  });
 })
 
 describe('calculateItemsFee', () => {
@@ -65,6 +70,11 @@ describe('calculateItemsFee', () => {
     const items = 15;
     const result = calculateItemsFee(items);
     expect(result).toBe(6.7);
+  });
+
+  it('should throw error when number of items is negative', () => {
+    const numOfItems = -1;
+    expect(() => calculateItemsFee(numOfItems)).toThrow('Number of items cannot be negative');
   });
 });
 
@@ -88,6 +98,11 @@ describe('applyRushHourMultiplier', () => {
     date = dayjs('26-01-2024 14:00:00', 'DD-MM-YYYY HH:mm');
     const result2 = applyRushHourMultiplier(deliveryFee, date);
     expect(result2).toBe(10);
+  });
+
+  it('should throw error when delivery fee is negative', () => {
+    const deliveryFee = -1;
+    expect(() => applyRushHourMultiplier(deliveryFee, dayjs())).toThrow('Delivery Fee cannot be negative');
   });
 });
 
