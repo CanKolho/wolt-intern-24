@@ -21,6 +21,7 @@ export interface ValidatedInputs {
 export interface CustomDatePickerProps {
   date: Dayjs,
   setDate: React.Dispatch<React.SetStateAction<Dayjs>>,
+  setIsDateValid: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface CustomNumberFieldProps {

@@ -35,11 +35,16 @@ describe('DeliveryFeeForm', () => {
     expect(resetbutton).toBeInTheDocument()
   })
 
-  it('renders the calculated delivery fee', async () => {        
-    await user.type(cartvalueinput, '3')
-    await user.type(distanceinput, '1000')
-    await user.type(itemsinput, '10')
-    await user.type(dateinput, '29/01/2024')
+  it('renders the calculated delivery fee', async () => {
+    const cartValue = '3';
+    const distance = '1000';
+    const items = '10';
+    const date = '29/04/2024';
+
+    await user.type(cartvalueinput, cartValue)
+    await user.type(distanceinput, distance)
+    await user.type(itemsinput, items)
+    await user.type(dateinput, date)
     await user.click(submitbutton)
 
     const deliveryfee = screen.getByTestId('fee')

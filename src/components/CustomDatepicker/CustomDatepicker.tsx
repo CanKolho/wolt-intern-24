@@ -1,29 +1,55 @@
+import { useState, useEffect } from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { CustomDatePickerProps } from '../../types';
-import dayjs from 'dayjs';
+import { DateValidationError } from '@mui/x-date-pickers/models'
+import dayjs, { Dayjs } from 'dayjs';
 
-const CustomDatepicker = ({ date, setDate }: CustomDatePickerProps) => {
+const CustomDatepicker = ({ date, setDate, setIsDateValid }: CustomDatePickerProps) => {
+  const [error, setError] = useState<DateValidationError | null>(null);
+  const [helperText, setHelperText] = useState<string>('');
+
+  // handles the side effect of the error state - this is used to disable the calculate button in the form
+  useEffect(() => {
+    switch (error) {
+      case 'invalidDate':
+        setIsDateValid(false);
+        setHelperText('Your date is invalid');
+        break;
+      case 'disablePast':
+        setIsDateValid(false);
+        setHelperText('Please select your date from today onwards');
+        break;
+      default:
+        setIsDateValid(true);
+        setHelperText('');
+        break;
+    }
+  }, [error, setIsDateValid]);
+
+    const handleDateChange = (newDate: Dayjs | null) => setDate(newDate || dayjs());
+
+    const handleErrorChange = (newError: DateValidationError | null) => setError(newError);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker 
-        label="Delivery Date" 
-        aria-label="Delivery date" 
+        label="Order Date" 
+        aria-label="Order date"
+        format="DD/MM/YYYY"
+        onError={handleErrorChange}
         slotProps={{ 
           textField: { 
             fullWidth: true, 
-            inputProps: { 
-              'data-test-id': 'orderTime',
-              'data-testid': 'orderTime',
-              min: 0,
-            } 
+            helperText: helperText,
+            inputProps: { 'data-test-id': 'orderTime', 'data-testid': 'orderTime' } 
           } 
-        }} 
-        format='DD/MM/YYYY'
-
+        }}
+        disablePast
         value={date} 
-        onChange={ (newDate) => setDate(newDate || dayjs()) }/>
+        onChange={handleDateChange}
+      />
     </LocalizationProvider>
   );
 }

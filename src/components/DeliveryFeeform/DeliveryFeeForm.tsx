@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button'
 import DeliveryFee from '../DeliveryFee/DeliveryFee';
-import Notification from '../Notification/Notification';
 import CustomNumberField from '../CustomNumberField/CustomNumberField';
 import CustomDatepicker from '../CustomDatepicker/CustomDatepicker';
 import { ValidatedInputs } from '../../types';
@@ -21,29 +20,31 @@ const DeliveryFeeForm = () => {
   const { reset: resetItems, ...items }= useField('number');
   const [date, setDate] = useState<Dayjs>(dayjs());
   const [deliveryFee, setDeliveryFee] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState<string>('');
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [isDateValid, setIsDateValid] = useState<boolean>(true);
 
+  // Check if the form is valid on every render and update the state accordingly - this is used to disable/enable the calculate button
   const checkFormValidity = () => {
-    const isValid = validateInput(cartValue.value) && validateInput(distance.value) && validateInput(items.value);
+    const isValid = validateInput(cartValue.value) && validateInput(distance.value) && validateInput(items.value) && isDateValid;
     setIsFormValid(isValid);
   }
 
+  // Check if the form is valid on every change of the inputs
   useEffect(() => {
     checkFormValidity();
-  }, [cartValue.value, distance.value, items.value]);
+  }, [cartValue.value, distance.value, items.value, isDateValid]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Inputs are validated by the custom number field component and the form is enabled only if all inputs are valid
+    // Inputs are validated by the customNumberField component and the form is enabled only if all inputs are valid
     const validatedInputs: ValidatedInputs = {
       cartValue: parseFloat(cartValue.value),
       distance: parseInt(distance.value),
       items: parseInt(items.value),
       date: date
     }
-
+    
     try {
       const calculatedFee: number = calculateDeliveryFee(validatedInputs);
       setDeliveryFee(calculatedFee.toFixed(2));
@@ -52,8 +53,7 @@ const DeliveryFeeForm = () => {
       if (error instanceof Error) {
         errorMessage += error.message;
       }
-      setErrorMessage(errorMessage);
-      setTimeout(() => setErrorMessage(''), 6000);
+      alert(errorMessage);
     }
   }
 
@@ -69,15 +69,14 @@ const DeliveryFeeForm = () => {
     <Container component="main" maxWidth="xs">
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 8, gap: 2 }}>
         <Typography component="h1" variant="h5">Delivery Fee Calculator</Typography>
-        <Notification message={errorMessage} />
         <Box component="form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {/* Numberfield components */}
             <Grid item xs={6}><CustomNumberField {...cartValue} step={0.01} label='Cart Value (€)' testId='cartValue' /></Grid>
-            <Grid item xs={6}><CustomNumberField {...distance} step={10} label="Distance (m)" testId='deliveryDistance' /></Grid>
+            <Grid item xs={6}><CustomNumberField {...distance} label="Distance (m)" testId='deliveryDistance' /></Grid>
             <Grid item xs={12}><CustomNumberField {...items} label="Number of items" testId='numberOfItems'/></Grid>
             {/* DatePicker component */}
-            <Grid item xs={12}><CustomDatepicker date={date} setDate={setDate} /></Grid>
+            <Grid item xs={12}><CustomDatepicker date={date} setDate={setDate} setIsDateValid={setIsDateValid} /></Grid>
             {/* Button components */}
             <Grid item xs={9}><Button disabled={!isFormValid} fullWidth variant="contained" color="primary" data-testid="calculate-button" data-test-id="calculate-button" type="submit">Calculate</Button></Grid>
             <Grid item xs={3}><Button fullWidth variant="outlined" color="error" data-testid="reset-button" data-test-id="reset-button" onClick={handleReset}>Reset</Button></Grid>
