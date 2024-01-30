@@ -2,11 +2,17 @@ import { Dayjs } from 'dayjs';
 import { ValidatedInputs } from '../../types';
 
 export const calculateSmallOrderFee = (cartValue: number): number => {
+  if (cartValue < 0) throw new Error('Cart value cannot be negative');
+
   const smallOrderFee = 10;
-  return cartValue < smallOrderFee ? smallOrderFee - cartValue : 0; 
+  const difference = Math.round((smallOrderFee - cartValue)*100)/100;
+  
+  return cartValue < smallOrderFee ? difference : 0; 
 };
 
 export const calculateDistanceFee = (distance: number): number => {
+  if (distance < 0) throw new Error('Distance cannot be negative');
+
   if (distance < 1000) return 1;
 
   const base = 2;
@@ -16,6 +22,8 @@ export const calculateDistanceFee = (distance: number): number => {
 }
 
 export const calculateItemsFee = (items: number): number => {
+  if (items < 0) throw new Error('Number of items cannot be negative');
+
   if (items < 5) return 0;
 
   const perItemCharge = 0.5;
@@ -26,6 +34,8 @@ export const calculateItemsFee = (items: number): number => {
 }
 
 export const applyRushHourMultiplier = (deliveryFee: number, date: Dayjs): number => {
+  if (deliveryFee < 0) throw new Error('Delivery Fee cannot be negative');
+
   const isFriday = date.day() === 5;
   const isRushHour = date.hour() >= 15 && date.hour() < 19;
   const rushHourMultiplier = 1.2;

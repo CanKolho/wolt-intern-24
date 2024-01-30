@@ -35,15 +35,6 @@ describe('DeliveryFeeForm', () => {
     expect(resetbutton).toBeInTheDocument()
   })
 
-  it('renders the error notification where inputs are invalid', async () => {    
-    await user.type(cartvalueinput, 'invalid input')
-    await user.click(submitbutton)
-
-    const notification = screen.getByTestId('notification')
-    expect(notification).toBeInTheDocument()
-    expect(notification).toHaveTextContent(/Cart value must be a positive number with a decimal point./i)
-  })
-
   it('renders the calculated delivery fee', async () => {        
     await user.type(cartvalueinput, '3')
     await user.type(distanceinput, '1000')

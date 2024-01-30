@@ -11,13 +11,6 @@ export interface deliveryFeeProps {
   deliveryFee: string
 }
 
-export interface NonValidatedInputs {
-  cartValue: string,
-  distance: string,
-  items: string,
-  date: string,
-}
-
 export interface ValidatedInputs {
   cartValue: number,
   distance: number,
@@ -30,10 +23,11 @@ export interface CustomDatePickerProps {
   setDate: React.Dispatch<React.SetStateAction<Dayjs>>,
 }
 
-export interface CustomTextFieldProps {
+export interface CustomNumberFieldProps {
   type: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label: string,
-  testId: string
+  testId: string,
+  step?: number
 }

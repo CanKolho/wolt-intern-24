@@ -13,9 +13,14 @@ describe('calculateSmallOrderFee', () => {
   });
 
   it('should return the difference if cart value is less than small order fee', () => {
-    const cartValue = 5;
+    const cartValue = 8.90;
     const result = calculateSmallOrderFee(cartValue);
-    expect(result).toBe(5);
+    expect(result).toBe(1.1);
+  });
+
+  it('should throw error when cart value is negative', () => {
+    const cartValue = -1;
+    expect(() => calculateSmallOrderFee(cartValue)).toThrow('Cart value cannot be negative');
   });
 });
 
