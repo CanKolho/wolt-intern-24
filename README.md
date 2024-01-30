@@ -54,7 +54,7 @@ The application calculates the delivery fee based on several rules:
 - Free delivery for carts over 200€.
 
 ## Testing
-This application holds *5* test suites and *23* tests in total.
+This application holds *4* test suites and *24* tests in total.
 
 To run all tests, run command:
 ```bash
@@ -74,9 +74,6 @@ npm test DeliveryFeeForm.test.tsx
 ```
 ```bash
 npm test DeliveryFee.test.tsx
-```
-```bash
-npm test Notification.test.tsx
 ```
 ```bash
 npm test CustomDatepicker.test.tsx
