@@ -10,13 +10,10 @@ const CustomDatepicker = ({ date, setDate, setIsDateValid }: CustomDatePickerPro
   const [error, setError] = useState<DateValidationError | null>(null);
   const [helperText, setHelperText] = useState<string>('');
 
-  // handles the side effect of the error state - this is used to disable the calculate button in the form
+  // handles the side effect of the error state - this is used to disable/enable the calculate button in the form
   useEffect(() => {
     switch (error) {
       case 'invalidDate':
-        setIsDateValid(false);
-        setHelperText('Your date is invalid');
-        break;
       case 'disablePast':
         setIsDateValid(false);
         setHelperText('Please select your date from today onwards');

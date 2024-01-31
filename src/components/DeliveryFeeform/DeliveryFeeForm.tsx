@@ -23,14 +23,14 @@ const DeliveryFeeForm = () => {
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [isDateValid, setIsDateValid] = useState<boolean>(true);
 
-  // Check if the form is valid on every render and update the state accordingly - this is used to disable/enable the calculate button
-  const checkFormValidity = () => {
-    const isValid = validateInput(cartValue.value) && validateInput(distance.value) && validateInput(items.value) && isDateValid;
-    setIsFormValid(isValid);
-  }
-
-  // Check if the form is valid on every change of the inputs
+  // Checks if the form is valid on every change of the inputs
+  // By defining the function inside the useEffect, we ensure that it captures the latest values of its dependencies each time they change.
   useEffect(() => {
+    const checkFormValidity = () => {
+      const isValid = validateInput(cartValue.value) && validateInput(distance.value) && validateInput(items.value) && isDateValid;
+      setIsFormValid(isValid);
+    }
+
     checkFormValidity();
   }, [cartValue.value, distance.value, items.value, isDateValid]);
 
