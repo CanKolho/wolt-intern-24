@@ -9,9 +9,8 @@ Welcome to the Wolt Summer 2024 Engineering Internship Frontend Assignment! This
 3. [Prerequisites](#prerequisites)
 4. [Installation](#installation)
 5. [Usage](#usage)
-6. [Features](#features)
-7. [Testing](#testing)
-8. [Authors](#authors)
+6. [Testing](#testing)
+7. [Authors](#authors)
 
 ## Project Overview
 This project is a front-end application designed to calculate delivery fees based on various parameters such as cart value, delivery distance, number of items, and order time. It adheres to specific business rules provided in the assignment, ensuring accurate calculation of delivery fees.
@@ -26,15 +25,16 @@ Before you begin, make sure you have the following installed on your machine:
 
 ## Installation
 Follow these steps to set up your development environment:
-1. Clone the repository to your local machine:
+
+1. Download the project's zip file from the Google Drive link provided with the job application.
+   
+2. Unzip the downloaded file in your preferred directory.
+
+3. Open a terminal and navigate to the project directory:
 ```bash
-git clone https://github.com/CanKolho/wolt-intern-24.gitl
+cd path_to_unzipped_folder/cankolho-wolt-intern-24
 ```
-2. Navigate to the project directory:
-```bash
-cd wolt-intern-24
-```
-3. Install the project dependencies:
+4. Install the project dependencies:
 ```bash
 npm install
 ```
@@ -44,15 +44,6 @@ To start the app, run the following command:
 ```bash
 npm run dev
 ```
-
-## Features
-The application calculates the delivery fee based on several rules:
-- Small order surcharge for carts under 10€.
-- Base (2€) delivery fee for the first 1km, with additional charges for extra distance.
-- Surcharge for orders with 5 or more items, and an additional bulk fee for more than 12 items.
-- Rush hour multiplier on Friday afternoons.
-- Free delivery for carts over 200€.
-
 ## Testing
 This application holds *4* test suites and *24* tests in total.
 
