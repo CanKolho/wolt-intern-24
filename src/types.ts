@@ -32,3 +32,13 @@ export interface CustomNumberFieldProps {
   testId: string,
   step?: number
 }
+
+export interface CustomButtonProps {
+  type?: 'button' | 'submit' | 'reset';
+  label: string;
+  handleClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+  color?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
+  variant?: 'contained' | 'outlined' ;
+  testId: string;
+}

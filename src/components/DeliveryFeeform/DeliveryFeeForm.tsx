@@ -4,9 +4,9 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button'
 import DeliveryFee from '../DeliveryFee/DeliveryFee';
 import CustomNumberField from '../CustomNumberField/CustomNumberField';
+import CustomButton from '../CustomButton/CustomButton';
 import CustomDatepicker from '../CustomDatepicker/CustomDatepicker';
 import { ValidatedInputs } from '../../types';
 import dayjs, { Dayjs } from 'dayjs';
@@ -27,7 +27,11 @@ const DeliveryFeeForm = () => {
   // By defining the function inside the useEffect, we ensure that it captures the latest values of its dependencies each time they change.
   useEffect(() => {
     const checkFormValidity = () => {
-      const isValid = validateInput(cartValue.value) && validateInput(distance.value) && validateInput(items.value) && isDateValid;
+      const isCartValueValid = validateInput(cartValue.value);
+      const isDistanceValid = validateInput(distance.value);
+      const isItemsValid = validateInput(items.value);
+
+      const isValid = isCartValueValid && isDistanceValid && isItemsValid && isDateValid;
       setIsFormValid(isValid);
     }
 
@@ -78,8 +82,8 @@ const DeliveryFeeForm = () => {
             {/* DatePicker component */}
             <Grid item xs={12}><CustomDatepicker date={date} setDate={setDate} setIsDateValid={setIsDateValid} /></Grid>
             {/* Button components */}
-            <Grid item xs={9}><Button disabled={!isFormValid} fullWidth variant="contained" color="primary" data-testid="calculate-button" data-test-id="calculate-button" type="submit">Calculate</Button></Grid>
-            <Grid item xs={3}><Button fullWidth variant="outlined" color="error" data-testid="reset-button" data-test-id="reset-button" onClick={handleReset}>Reset</Button></Grid>
+            <Grid item xs={9}><CustomButton type='submit' label='Calculate' testId='calculateButton' disabled={!isFormValid} /></Grid>
+            <Grid item xs={3}><CustomButton label='Reset' testId='resetButton' variant='outlined' color='error' handleClick={handleReset} /></Grid>
           </Grid>
         </Box>
         <DeliveryFee deliveryFee={deliveryFee} />

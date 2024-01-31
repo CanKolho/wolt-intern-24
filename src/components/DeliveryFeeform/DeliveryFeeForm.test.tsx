@@ -21,8 +21,8 @@ describe('DeliveryFeeForm', () => {
     distanceinput = screen.getByTestId('deliveryDistance')
     itemsinput = screen.getByTestId('numberOfItems')
     dateinput = screen.getByTestId('orderTime')
-    submitbutton = screen.getByRole('button', { name: /calculate/i })
-    resetbutton = screen.getByRole('button', { name: /reset/i })
+    submitbutton = screen.getByTestId('calculateButton')
+    resetbutton = screen.getByTestId('resetButton')
   })
 
   it('renders correctly the form elements', () => {    
