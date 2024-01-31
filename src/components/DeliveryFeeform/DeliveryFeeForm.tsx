@@ -77,8 +77,8 @@ const DeliveryFeeForm = () => {
           <Grid container spacing={2}>
             {/* Numberfield components */}
             <Grid item xs={6}><CustomNumberField {...cartValue} step={0.01} label='Cart Value (€)' testId='cartValue' /></Grid>
-            <Grid item xs={6}><CustomNumberField {...distance} label="Distance (m)" testId='deliveryDistance' /></Grid>
-            <Grid item xs={12}><CustomNumberField {...items} label="Number of items" testId='numberOfItems'/></Grid>
+            <Grid item xs={6}><CustomNumberField {...distance} min={1} label="Distance (m)" testId='deliveryDistance' /></Grid>
+            <Grid item xs={12}><CustomNumberField {...items} min={1} label="Number of items" testId='numberOfItems'/></Grid>
             {/* DatePicker component */}
             <Grid item xs={12}><CustomDatepicker date={date} setDate={setDate} setIsDateValid={setIsDateValid} /></Grid>
             {/* Button components */}

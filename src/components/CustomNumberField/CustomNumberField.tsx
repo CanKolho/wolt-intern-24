@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import { CustomNumberFieldProps } from '../../types';
 import { validateInput } from '../../utils/validation';
 
-const CustomNumberField = ({ testId, step, ...props }: CustomNumberFieldProps) => {
+const CustomNumberField = ({ testId, step = 1, min = 0, ...props }: CustomNumberFieldProps) => {
   const [error, setError] = useState<boolean>(false);
   const [helperText, setHelperText] = useState<string>('');
   
@@ -23,8 +23,8 @@ const CustomNumberField = ({ testId, step, ...props }: CustomNumberFieldProps) =
         inputProps: {
           'data-test-id': testId,
           'data-testid': testId,
-          min: 0,
-          step: step || 1,
+          min: min,
+          step: step,
           pattern: "\\d*(\\.\\d+)?",
           onInput: (event: React.FocusEvent<HTMLInputElement>) => checkInput(event.target.value)
         }

@@ -31,6 +31,7 @@ export interface CustomNumberFieldProps {
   label: string,
   testId: string,
   step?: number
+  min?: number
 }
 
 export interface CustomButtonProps {
