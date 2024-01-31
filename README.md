@@ -32,7 +32,7 @@ Follow these steps to set up your development environment:
 
 3. Open a terminal and navigate to the project directory:
 ```bash
-cd path_to_unzipped_folder/cankolho-wolt-intern-24
+cd path_to_unzipped_folder/
 ```
 4. Install the project dependencies:
 ```bash
