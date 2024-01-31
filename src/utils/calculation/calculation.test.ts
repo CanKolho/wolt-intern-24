@@ -1,28 +1,28 @@
-import { calculateSmallOrderFee, calculateDistanceFee, calculateItemsFee, applyRushHourMultiplier, calculateDeliveryFee } from './calculation';
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { ValidatedInputs } from '../../types';
+import { calculateSmallOrderFee, calculateDistanceFee, calculateItemsFee, applyRushHourMultiplier, calculateDeliveryFee } from './calculation'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { ValidatedInputs } from '../../types'
 // This is required to parse the date string in the format DD-MM-YYYY HH:mm
-dayjs.extend(customParseFormat);
+dayjs.extend(customParseFormat)
 
 describe('calculateSmallOrderFee', () => {
   it('should return 0 if cart value is greater than or equal to small order fee', () => {
-    const cartValue = 15;
-    const result = calculateSmallOrderFee(cartValue);
-    expect(result).toBe(0);
-  });
+    const cartValue = 15
+    const result = calculateSmallOrderFee(cartValue)
+    expect(result).toBe(0)
+  })
 
   it('should return the difference if cart value is less than small order fee', () => {
-    const cartValue = 8.90;
-    const result = calculateSmallOrderFee(cartValue);
-    expect(result).toBe(1.1);
-  });
+    const cartValue = 8.90
+    const result = calculateSmallOrderFee(cartValue)
+    expect(result).toBe(1.1)
+  })
 
   it('should throw error when cart value is negative', () => {
-    const cartValue = -1;
-    expect(() => calculateSmallOrderFee(cartValue)).toThrow('Cart value cannot be negative');
-  });
-});
+    const cartValue = -1
+    expect(() => calculateSmallOrderFee(cartValue)).toThrow('Cart value cannot be negative')
+  })
+})
 
 describe('calculateDistanceFee', () => {
   it('should return 1€ when delivery distance is less than 1000m', () => {
@@ -35,76 +35,76 @@ describe('calculateDistanceFee', () => {
     const distance = 1000
     const result = calculateDistanceFee(distance)
     expect(result).toBe(2)
-  });
+  })
 
   it('should return the correct fee when delivery distance is greater than 1000m', () => {
-    let distance = 1500;
-    let result = calculateDistanceFee(distance);
-    expect(result).toBe(3);
+    let distance = 1500
+    let result = calculateDistanceFee(distance)
+    expect(result).toBe(3)
 
-    distance = 1650;
-    result = calculateDistanceFee(distance);
-    expect(result).toBe(4);
-  });
+    distance = 1650
+    result = calculateDistanceFee(distance)
+    expect(result).toBe(4)
+  })
 
   it('should throw error when distance is negative', () => {
-    const distance = -1;
-    expect(() => calculateDistanceFee(distance)).toThrow('Distance cannot be negative');
-  });
+    const distance = -1
+    expect(() => calculateDistanceFee(distance)).toThrow('Distance cannot be negative')
+  })
 })
 
 describe('calculateItemsFee', () => {
   it('should return 0 if items is less than 5', () => {
-    const items = 4;
-    const result = calculateItemsFee(items);
-    expect(result).toBe(0);
-  });
+    const items = 4
+    const result = calculateItemsFee(items)
+    expect(result).toBe(0)
+  })
 
   it('should return the correct fee if items is greater than 5', () => {
-    const items = 8;
-    const result = calculateItemsFee(items);
-    expect(result).toBe(2);
-  });
+    const items = 8
+    const result = calculateItemsFee(items)
+    expect(result).toBe(2)
+  })
 
   it('should return the correct fee if items is greater than 12', () => {
-    const items = 15;
-    const result = calculateItemsFee(items);
-    expect(result).toBe(6.7);
-  });
+    const items = 15
+    const result = calculateItemsFee(items)
+    expect(result).toBe(6.7)
+  })
 
   it('should throw error when number of items is negative', () => {
-    const numOfItems = -1;
-    expect(() => calculateItemsFee(numOfItems)).toThrow('Number of items cannot be negative');
-  });
-});
+    const numOfItems = -1
+    expect(() => calculateItemsFee(numOfItems)).toThrow('Number of items cannot be negative')
+  })
+})
 
 describe('applyRushHourMultiplier', () => {
   it('should return the delivery fee multiplied if it is Friday and rush hour', () => {
-    const deliveryFee = 10;
-    const date = dayjs('26-01-2024 16:00', 'DD-MM-YYYY HH:mm');
-    const result = applyRushHourMultiplier(deliveryFee, date);
-    expect(result).toBe(12);
-  });
+    const deliveryFee = 10
+    const date = dayjs('26-01-2024 16:00', 'DD-MM-YYYY HH:mm')
+    const result = applyRushHourMultiplier(deliveryFee, date)
+    expect(result).toBe(12)
+  })
 
   it('should return the delivery fee if it is not Friday or not rush hour', () => {
-    const deliveryFee = 10;
+    const deliveryFee = 10
 
     // Not Friday
-    let date = dayjs('27-01-2024 14:00', 'DD-MM-YYYY HH:mm');
-    const result = applyRushHourMultiplier(deliveryFee, date);
-    expect(result).toBe(10);
+    let date = dayjs('27-01-2024 14:00', 'DD-MM-YYYY HH:mm')
+    const result = applyRushHourMultiplier(deliveryFee, date)
+    expect(result).toBe(10)
 
     // Friday but not rush hour
-    date = dayjs('26-01-2024 14:00:00', 'DD-MM-YYYY HH:mm');
-    const result2 = applyRushHourMultiplier(deliveryFee, date);
-    expect(result2).toBe(10);
-  });
+    date = dayjs('26-01-2024 14:00:00', 'DD-MM-YYYY HH:mm')
+    const result2 = applyRushHourMultiplier(deliveryFee, date)
+    expect(result2).toBe(10)
+  })
 
   it('should throw error when delivery fee is negative', () => {
-    const deliveryFee = -1;
-    expect(() => applyRushHourMultiplier(deliveryFee, dayjs())).toThrow('Delivery Fee cannot be negative');
-  });
-});
+    const deliveryFee = -1
+    expect(() => applyRushHourMultiplier(deliveryFee, dayjs())).toThrow('Delivery Fee cannot be negative')
+  })
+})
 
 describe('calculateDeliveryFee', () => {
   it('should return 0 if cart value is greater than or equal to 200', () => {
@@ -113,10 +113,10 @@ describe('calculateDeliveryFee', () => {
       distance: 1000,
       items: 5,
       date: dayjs('26-01-2024 12:00', 'DD-MM-YYYY HH:mm')
-    };
-    const result = calculateDeliveryFee(inputs);
-    expect(result).toBe(0);
-  });
+    }
+    const result = calculateDeliveryFee(inputs)
+    expect(result).toBe(0)
+  })
 
   it('should calculate the delivery fee correctly', () => {
     const inputs: ValidatedInputs = {
@@ -124,10 +124,10 @@ describe('calculateDeliveryFee', () => {
       distance: 1500,
       items: 10,
       date: dayjs('27-01-2024 18:00', 'DD-MM-YYYY HH:mm')
-    };
-    const result = calculateDeliveryFee(inputs);
-    expect(result).toBe(6);
-  });
+    }
+    const result = calculateDeliveryFee(inputs)
+    expect(result).toBe(6)
+  })
 
   it('should calculate the delivery fee with rush hour multiplier', () => {
     const inputs: ValidatedInputs = {
@@ -135,8 +135,8 @@ describe('calculateDeliveryFee', () => {
       distance: 2000,
       items: 3,
       date: dayjs('26-01-2024 16:30', 'DD-MM-YYYY HH:mm')
-    };
-    const result = calculateDeliveryFee(inputs);
-    expect(result).toBe(4.8);
-  });
-});
+    }
+    const result = calculateDeliveryFee(inputs)
+    expect(result).toBe(4.8)
+  })
+})

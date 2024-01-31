@@ -1,4 +1,4 @@
-import DeliveryFeeForm from "./components/DeliveryFeeform/DeliveryFeeForm";
+import DeliveryFeeForm from './components/DeliveryFeeform/DeliveryFeeForm'
 
 const App = () => {
   return (

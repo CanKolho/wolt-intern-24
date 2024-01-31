@@ -1,17 +1,17 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import DeliveryFeeForm from './DeliveryFeeForm';
+import DeliveryFeeForm from './DeliveryFeeForm'
 
 describe('DeliveryFeeForm', () => {
-  let user: UserEvent;
-  let header: HTMLElement;
-  let cartvalueinput: HTMLElement;
-  let distanceinput: HTMLElement;
-  let itemsinput: HTMLElement;
-  let dateinput: HTMLElement;
-  let submitbutton: HTMLElement;
-  let resetbutton: HTMLElement;
+  let user: UserEvent
+  let header: HTMLElement
+  let cartvalueinput: HTMLElement
+  let distanceinput: HTMLElement
+  let itemsinput: HTMLElement
+  let dateinput: HTMLElement
+  let submitbutton: HTMLElement
+  let resetbutton: HTMLElement
 
   beforeEach(() => {
     user = userEvent.setup()
@@ -25,7 +25,7 @@ describe('DeliveryFeeForm', () => {
     resetbutton = screen.getByTestId('resetButton')
   })
 
-  it('renders correctly the form elements', () => {    
+  it('renders correctly the form elements', () => {
     expect(header).toBeInTheDocument()
     expect(cartvalueinput).toBeInTheDocument()
     expect(distanceinput).toBeInTheDocument()
@@ -36,10 +36,10 @@ describe('DeliveryFeeForm', () => {
   })
 
   it('renders the calculated delivery fee', async () => {
-    const cartValue = '3';
-    const distance = '1000';
-    const items = '10';
-    const date = '29/04/2024';
+    const cartValue = '3'
+    const distance = '1000'
+    const items = '10'
+    const date = '29/04/2024'
 
     await user.type(cartvalueinput, cartValue)
     await user.type(distanceinput, distance)

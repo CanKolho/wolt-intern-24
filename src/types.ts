@@ -1,10 +1,10 @@
-import { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs'
 
 export interface UseFieldReturn {
-  type: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  reset: () => void;
+  type: string
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  reset: () => void
 }
 
 export interface deliveryFeeProps {
@@ -12,34 +12,34 @@ export interface deliveryFeeProps {
 }
 
 export interface ValidatedInputs {
-  cartValue: number,
-  distance: number,
-  items: number,
-  date: Dayjs,
+  cartValue: number
+  distance: number
+  items: number
+  date: Dayjs
 }
 
 export interface CustomDatePickerProps {
-  date: Dayjs,
-  setDate: React.Dispatch<React.SetStateAction<Dayjs>>,
+  date: Dayjs
+  setDate: React.Dispatch<React.SetStateAction<Dayjs>>
   setIsDateValid: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface CustomNumberFieldProps {
-  type: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  label: string,
-  testId: string,
+  type: string
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  label: string
+  testId: string
   step?: number
   min?: number
 }
 
 export interface CustomButtonProps {
-  type?: 'button' | 'submit' | 'reset';
-  label: string;
-  handleClick?: React.MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
-  color?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
-  variant?: 'contained' | 'outlined' ;
-  testId: string;
+  type?: 'button' | 'submit' | 'reset'
+  label: string
+  handleClick?: React.MouseEventHandler<HTMLButtonElement>
+  disabled?: boolean
+  color?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'
+  variant?: 'contained' | 'outlined'
+  testId: string
 }

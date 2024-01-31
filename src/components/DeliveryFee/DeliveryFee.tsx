@@ -1,9 +1,9 @@
-import Typography from '@mui/material/Typography';
-import { deliveryFeeProps } from '../../types';
+import Typography from '@mui/material/Typography'
+import { deliveryFeeProps } from '../../types'
 
 const DeliveryFee = ({ deliveryFee }: deliveryFeeProps) => {
-  if (!deliveryFee) return null;
-  
+  if (!deliveryFee) return null
+
   return (
     <Typography component="h2" variant="h6" data-testid='fee' data-test-id='fee'>
       Delivery Fee: {deliveryFee} €
@@ -11,4 +11,4 @@ const DeliveryFee = ({ deliveryFee }: deliveryFeeProps) => {
   )
 }
 
-export default DeliveryFee;
+export default DeliveryFee

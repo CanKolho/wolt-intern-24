@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { UseFieldReturn } from "../types"
+import { useState } from 'react'
+import { UseFieldReturn } from '../types'
 
 // Custom hook for handling form fields
 export const useField = (type: string): UseFieldReturn => {
@@ -10,7 +10,7 @@ export const useField = (type: string): UseFieldReturn => {
   }
 
   const reset= (): void => setValue('')
-  
+
   return {
     type,
     value,
